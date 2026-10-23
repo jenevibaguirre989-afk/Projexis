@@ -1,0 +1,1082 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to 2D Design & Conceptual Elements</title>
+    <style>
+      :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-accent: #334155;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --accent-color: #38bdf8;
+        --accent-secondary: #f43f5e;
+        --border-color: #475569;
+        --sidebar-width: 280px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: var(--bg-primary);
+        color: var(--text-main);
+        line-height: 1.6;
+        display: flex;
+      }
+
+      /* Navigation Sidebar */
+      nav {
+        width: var(--sidebar-width);
+        height: 100vh;
+        background-color: var(--bg-secondary);
+        border-right: 1px solid var(--border-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        padding: 2rem 1rem;
+      }
+
+      nav h1 {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+        padding-left: 0.5rem;
+        border-left: 3px solid var(--accent-color);
+      }
+
+      nav ul {
+        list-style: none;
+      }
+
+      nav li {
+        margin-bottom: 0.5rem;
+      }
+
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+      }
+
+      nav a:hover {
+        background-color: var(--bg-accent);
+        color: var(--text-main);
+        padding-left: 0.75rem;
+      }
+
+      nav .chapter-title {
+        font-weight: bold;
+        color: var(--text-main);
+        margin-top: 1rem;
+        font-size: 0.95rem;
+      }
+
+      /* Main Content Container */
+      main {
+        margin-left: var(--sidebar-width);
+        padding: 3rem 4rem;
+        max-width: 1100px;
+        width: 100%;
+      }
+
+      header {
+        margin-bottom: 3rem;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 1.5rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        color: var(--accent-color);
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        color: var(--accent-color);
+        margin: 2.5rem 0 1.5rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--bg-accent);
+      }
+
+      h3 {
+        font-size: 1.3rem;
+        color: var(--text-main);
+        margin: 1.5rem 0 1rem 0;
+      }
+
+      p {
+        margin-bottom: 1.25rem;
+        color: #cbd5e1;
+      }
+
+      ul,
+      ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+        color: #cbd5e1;
+      }
+
+      li {
+        margin-bottom: 0.5rem;
+      }
+
+      strong {
+        color: var(--text-main);
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background: var(--border-color);
+        margin: 3rem 0;
+      }
+
+      /* Diagram & Code formatting */
+      pre {
+        background-color: #020617;
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        overflow-x: auto;
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.875rem;
+        color: #e2e8f0;
+        margin-bottom: 1.5rem;
+      }
+
+      code {
+        font-family:
+          "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        background-color: #020617;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+        color: #e2e8f0;
+      }
+
+      /* Data Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+      }
+
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border: 1px solid var(--border-color);
+      }
+
+      th {
+        background-color: var(--bg-secondary);
+        color: var(--accent-color);
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) td {
+        background-color: rgba(255, 255, 255, 0.02);
+      }
+
+      /* Lab Sheet Layout Component Styling */
+      .grid-demo-box {
+        background-color: var(--bg-secondary);
+        border: 1px dashed var(--accent-color);
+        padding: 1rem;
+        border-radius: 6px;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      /* Interactive smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+        nav {
+          width: 100%;
+          height: auto;
+          position: relative;
+          border-right: none;
+          border-bottom: 1px solid var(--border-color);
+        }
+        main {
+          margin-left: 0;
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Sidebar -->
+    <nav>
+      <h1>2D Design Guide</h1>
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+
+        <li class="chapter-title">Chapter 1: Overview</li>
+        <li><a href="#ch1-1">1.1 Digital Context</a></li>
+        <li><a href="#ch1-2">1.2 GUI Evolution</a></li>
+        <li><a href="#ch1-3">1.3 Visual Thinking</a></li>
+
+        <li class="chapter-title">Chapter 2: Coordinates</li>
+        <li><a href="#ch2-1">2.1 Cartesian Plane</a></li>
+        <li><a href="#ch2-2">2.2 Screen Layout Space</a></li>
+        <li><a href="#ch2-3">2.3 Layout Engineering</a></li>
+
+        <li class="chapter-title">Chapter 3: Elements</li>
+        <li><a href="#ch3-1">3.1 The Point</a></li>
+        <li><a href="#ch3-2">3.2 The Line</a></li>
+        <li><a href="#ch3-3">3.3 The Plane</a></li>
+
+        <li class="chapter-title">Chapter 4: Ideation</li>
+        <li><a href="#ch4-1">4.1 Thinking Models</a></li>
+        <li><a href="#ch4-2">4.2 Sketching & Wireframes</a></li>
+        <li><a href="#ch4-3">4.3 Semiometrics & Signs</a></li>
+
+        <li class="chapter-title">Chapter 5: Lab Grid Application</li>
+        <li><a href="#ch5-1">5.1 12-Column Architecture</a></li>
+        <li><a href="#ch5-2">5.2 Step-by-Step Task</a></li>
+        <li><a href="#ch5-3">5.3 Review Questions</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Text Workspace Container -->
+    <main>
+      <header id="intro">
+        <p>Principles of 2D Design</p>
+        <h1>Introduction to 2D Design & Conceptual Elements</h1>
+      </header>
+
+      <!-- CHAPTER 1 -->
+      <section id="chapter1">
+        <h2>CHAPTER 1: What is 2D Design in IT/Computing?</h2>
+
+        <h3 id="ch1-1">
+          1.1 Defining Two-Dimensional Design in a Digital Context
+        </h3>
+        <p>
+          Two-dimensional (2D) design is the deliberate organization of visual
+          elements on a flat surface to facilitate communication, evoke human
+          emotion, or execute functional interactions. In traditional fine arts,
+          this flat surface (or <strong>plane</strong>) is typically paper,
+          canvas, or a physical wall.
+        </p>
+        <p>
+          In information technology and computing, the canvas shifts entirely to
+          digital display technologies: liquid crystal displays (LCDs), organic
+          light-emitting diodes (OLEDs), mobile phone touchscreens, and
+          projection systems.
+        </p>
+
+        <pre>
++-----------------------------------------------------------------+
+|                     THE 2D DESIGN PLANES                        |
++------------------------------+----------------------------------+
+|      Traditional Medium      |    IT/Computing Medium           |
++------------------------------+----------------------------------+
+| * Physical paper or canvas   | * Digital Emissive Screens       |
+| * Reflected ambient light    | * Projectors / Touchscreens      |
+| * Static physical bounds     | * Dynamic Viewports (Responsive) |
++------------------------------+----------------------------------+
+</pre
+        >
+
+        <p>
+          2D design within computing is not merely an aesthetic pursuit; it is
+          architectural. It forms the baseline infrastructure for:
+        </p>
+        <ul>
+          <li>
+            <strong>User Interface (UI) Design:</strong> The visual blueprint of
+            buttons, fields, forms, and navigation systems.
+          </li>
+          <li>
+            <strong>User Experience (UX) Design:</strong> The spatial
+            distribution of elements that guides cognitive flow and user
+            interaction.
+          </li>
+          <li>
+            <strong>Data Visualization:</strong> The conversion of alphanumeric
+            structures, arrays, and database records into graphical forms
+            (charts, graphs, nodes) that human cognition can instantly parse.
+          </li>
+          <li>
+            <strong>Computer Graphics & Front-End Engineering:</strong> The
+            logical orchestration of graphical assets, layouts, and type
+            treatments rendered dynamically via code (HTML/CSS, SVG, canvas
+            elements, OpenGL/WebGL views).
+          </li>
+        </ul>
+
+        <h3 id="ch1-2">
+          1.2 The Evolution from Physical to Graphical Interfaces
+        </h3>
+        <p>
+          Historically, computing was text-driven, operating within Command Line
+          Interfaces (CLIs) where spatial layout was governed strictly by fixed
+          character widths and line breaks. The paradigm shift occurred with the
+          advent of the <strong>Graphical User Interface (GUI)</strong>.
+        </p>
+        <p>
+          The GUI transformed computer interaction from abstract linguistic
+          commands into visual spatial reasoning. Files became icons,
+          directories became folders, and program boundaries became windows.
+          This shift relied entirely on 2D design principles: using shape,
+          space, line, color, and value to mimic real-world interactions or
+          establish intuitive new systems of visual logic.
+        </p>
+        <p>
+          In current computing ecosystems, 2D design must account for variable
+          <strong>viewports</strong>. A user may interact with an application on
+          an ultrawide desktop monitor, a tablet, a smartphone, or a smartwatch
+          display. Therefore, modern digital 2D design demands an understanding
+          of adaptive layouts, scalable element properties, and systematic grid
+          alignment.
+        </p>
+
+        <h3 id="ch1-3">1.3 The Design Process and Visual Thinking in IT</h3>
+        <p>
+          To build a functional digital interface or layout, a developer or
+          designer cannot simply generate assets arbitrarily on screen. The
+          process requires systematic design thinking, research, and ideation.
+        </p>
+        <p>
+          As established in contemporary design methodologies, the development
+          of visual assets must stem from an active collection of inspiration,
+          rigorous factual discovery, and strategic iteration.
+        </p>
+
+        <pre>
+                +----------------------------+
+                |    THE SYSTEMATIC IDEATION |
+                |          PROCESS           |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Ongoing Inspiration &     |
+                |  Observation               |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Primary & Secondary       |
+                |  Research Phase            |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Lateral Thinking &        |
+                |  Ideation (Brainstorming)  |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Linear Reasoning          |
+                |  (Refinement & Logic)      |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Exploratory Drawing &     |
+                |  Thumbnailing              |
+                +--------------+-------------+
+                               |
+                               v
+                +----------------------------+
+                |  Digital Grid Rendering    |
+                |  (Final UI Asset/Layout)   |
+                +----------------------------+
+</pre
+        >
+
+        <ol>
+          <li>
+            <strong>Active Observation:</strong> The finest visual
+            configurations are informed by ongoing engagement with the physical
+            and digital world. Designers build a personal repository or catalog
+            of visual data—noting textures, patterns, spatial relationships, and
+            light behaviors—to form an internal reference set.
+          </li>
+          <li>
+            <strong>Contextualization:</strong> This is the critical practice of
+            placing a design project within the broader, interrelated semantic
+            and cultural systems of its target users. In IT, this means
+            understanding how an interface will coexist with user lifestyles,
+            cognitive habits, and daily device usage.
+          </li>
+          <li>
+            <strong>Research Foundations:</strong> Design problems are resolved
+            by deploying both primary and secondary research:
+            <ul>
+              <li>
+                <strong>Primary Research:</strong> Direct gathering of original
+                data. This includes performing real-time user observation,
+                conducting structured interviews, deploying usability surveys,
+                and engaging in user role-playing or focus groups.
+              </li>
+              <li>
+                <strong>Secondary Research:</strong> Analyzing preexisting
+                records. This encompasses studying industry design
+                documentation, reviewing historical layouts, reviewing existing
+                software benchmarks, and reading technical case studies.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <hr />
+
+      <!-- CHAPTER 2 -->
+      <section id="chapter2">
+        <h2>
+          CHAPTER 2: The Cartesian Coordinate Plane vs. Digital Screen Layouts
+        </h2>
+
+        <h3 id="ch2-1">
+          2.1 The Geometric Foundation: The Cartesian Coordinate System
+        </h3>
+        <p>
+          To position any visual element on a two-dimensional surface
+          programmatically, computing relies on coordinate mathematics. The
+          foundation of this mapping is the
+          <strong>Cartesian Coordinate Plane</strong>, credited to René
+          Descartes.
+        </p>
+
+        <pre>
+                         +Y
+                          |
+                          |
+              Quadrant II | Quadrant I
+              (-X, +Y)    | (+X, +Y)
+                          |
+      -----------(0,0)----+----------- +X
+                 Origin   |
+                          |
+             Quadrant III | Quadrant IV
+              (-X, -Y)    | (+X, -Y)
+                          |
+                         -Y
+</pre
+        >
+
+        <p>
+          In standard analytical geometry, the Cartesian system is defined by
+          two perpendicular axes intersecting at a central reference point
+          designated as the <strong>Origin (0,0)</strong>.
+        </p>
+        <ul>
+          <li>
+            The horizontal axis is denoted as the <strong>X-axis</strong>,
+            tracking values left-to-right.
+          </li>
+          <li>
+            The vertical axis is denoted as the <strong>Y-axis</strong>,
+            tracking values bottom-to-top.
+          </li>
+          <li>
+            This configuration generates four distinct quadrants. Quadrant I
+            represents values where both X and Y are positive. As X moves
+            eastward, values increase positively; as Y moves northward, values
+            increase positively.
+          </li>
+        </ul>
+
+        <h3 id="ch2-2">2.2 The Shift to Digital Screen Coordinate Layouts</h3>
+        <p>
+          When computing architectures integrated graphical framebuffers to map
+          software interfaces onto physical displays, engineers modified the
+          traditional geometric grid. This adaptation created the
+          <strong>Digital Screen Coordinate Space</strong>.
+        </p>
+
+        <pre>
+      (0,0) Origin
+        +--------------------------------------------+-----------> +X
+        |                                            |  (Increasing)
+        |                                            |
+        |               DIGITAL VIEWPORT             |
+        |             (e.g., 1920x1080px)            |
+        |                                            |
+        |                                            |
+        +--------------------------------------------+
+        |
+        |
+        v
+       +Y (Increasing)
+</pre
+        >
+
+        <p>
+          In digital layouts (including HTML/CSS web layout engines, native
+          application viewports, and design environments like Canva), the
+          coordinate mapping differs fundamentally from standard geometry in two
+          key ways:
+        </p>
+        <ol>
+          <li>
+            <strong>The Origin (0,0) is Fixed at the Top-Left Corner:</strong>
+            The absolute upper-left corner of the display window or active
+            bounding canvas serves as the initial zero-point reference.
+          </li>
+          <li>
+            <strong>The Y-axis is Inverted:</strong> While the X-axis continues
+            to increment positively from left to right, the
+            <strong>Y-axis increments positively from top to bottom</strong>.
+          </li>
+        </ol>
+        <p>
+          <em>Why the inversion?</em> This implementation stems directly from
+          early television and computer monitor cathode-ray tube (CRT) display
+          architectures. CRT electron guns scanned screen phosphors
+          line-by-line, moving systematically from the
+          <strong>top-left corner to the bottom-right corner</strong>. As a
+          result, computer memory arrays (framebuffers) stored pixel data
+          sequentially starting with line index zero at the top. Modern display
+          pipelines preserve this software logic.
+        </p>
+
+        <h3 id="ch2-3">2.3 Mathematical Consequences for Layout Engineering</h3>
+        <p>
+          Understanding this structural inversion is critical when working with
+          positions, transformations, and alignment configurations.
+        </p>
+        <ul>
+          <li>
+            <strong>Element Vectors:</strong> An object placed at position (X:
+            200, Y: 400) sits 200 pixels outward from the left margin and 400
+            pixels downward from the top margin.
+          </li>
+          <li>
+            <strong>Bounding Boxes and Spacing Calculations:</strong> If a
+            digital canvas has a global screen resolution of 1920 &times; 1080
+            pixels:
+            <ul>
+              <li>Absolute top-left corner: (0, 0)</li>
+              <li>Absolute top-right corner: (1920, 0)</li>
+              <li>Absolute bottom-left corner: (0, 1080)</li>
+              <li>Absolute bottom-right corner: (1920, 1080)</li>
+              <li>True geographic center: (1920/2, 1080/2) = (960, 540)</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          When programming custom interface movements, scaling elements, or
+          positioning structural dividers inside a modern layout tool like
+          Canva, keeping this inverted Y-plane in mind prevents spatial layout
+          errors.
+        </p>
+      </section>
+
+      <hr />
+
+      <!-- CHAPTER 3 -->
+      <section id="chapter3">
+        <h2>CHAPTER 3: Conceptual Elements: Point, Line, and Plane</h2>
+        <p>
+          According to design theorist Wucius Wong, elements of design can be
+          categorized into four distinct groups: Conceptual Elements, Visual
+          Elements, Relational Elements, and Practical Elements. This week
+          covers <strong>Conceptual Elements</strong>. Conceptual elements do
+          not actually exist in physical form; they are not visible to the naked
+          eye until they are rendered onto a surface. They are felt as present
+          ideas or mathematical bounds.
+        </p>
+
+        <pre>
+       CONCEPTUAL PHASE                     VISUAL RENDERING PHASE
+  [ Mathematical Definition ]              [ Concrete Implementation ]
+
+     * Point (0-D Coordinate)   ======>      * Dot / Visual Node (Circle/Square)
+     * Line  (1-D Vector Path)  ======>      * Stroke / Border / Rule
+     * Plane (2-D Bounding Area) ======>      * Container / Background Division
+</pre
+        >
+
+        <h3 id="ch3-1">3.1 The Point</h3>
+        <ul>
+          <li>
+            <strong>Conceptual Definition:</strong> A point marks an absolute
+            position in space. Conceptually, a point has
+            <strong>no length, no width, and no depth</strong>. It occupies zero
+            dimensions (0-D). It represents the beginning and the end of any
+            visual journey, the intersection where lines meet, or a unique
+            intersection coordinate point on a digital grid.
+          </li>
+          <li>
+            <strong>Digital Implementation:</strong> A conceptual point becomes
+            visible when materialized on a layout canvas as a dot, a pixel, a
+            single marker node, or a miniature vector element. In UI
+            architecture, a point defines the target location of click-events,
+            anchor points for drawing vector paths, or the layout coordinate of
+            specific interface assets.
+          </li>
+          <li>
+            <strong>Visual Characteristics:</strong> When a point is rendered
+            visually, its location within the display area establishes immediate
+            focal energy. A single point placed dead-center draws the eye
+            inward, stabilizing the plane. If shifted off-center, it generates
+            visual tension, prompting the eye to trace the negative space
+            between the point and the outer display boundaries.
+          </li>
+        </ul>
+
+        <h3 id="ch3-2">3.2 The Line</h3>
+        <ul>
+          <li>
+            <strong>Conceptual Definition:</strong> When a point undergoes
+            movement or translation through space, its path forms a
+            <strong>Line</strong>. Conceptually, a line possesses
+            <strong>length but no width</strong>. It is an inherently
+            one-dimensional (1-D) entity defined by its trajectory, structural
+            endpoints, and directional vectors.
+          </li>
+          <li>
+            <strong>Digital Implementation:</strong> In web engineering and
+            software layouts, lines manifest as structural borders, dividers
+            (&lt;hr&gt; elements), wireframe grids, margins, or connecting edges
+            in interactive data graphs.
+          </li>
+          <li>
+            <strong>Wong's Classification of Line Properties:</strong> As Wucius
+            Wong expands in his fundamental design texts, when a line is given
+            visual form, it gains width, color, and texture, transforming it
+            into a visual element with specific attributes:
+            <ol>
+              <li>
+                <strong>Overall Shape:</strong> Whether the line is straight,
+                angular, fluid, jagged, curved, or organic.
+              </li>
+              <li>
+                <strong>Body Characteristics:</strong> Whether the line is
+                solid, dashed, dotted, uniform in width, or tapers to varying
+                degrees along its path.
+              </li>
+              <li>
+                <strong>Terminations:</strong> How the endpoints look—blunt,
+                squared, rounded, or arrowed.
+              </li>
+            </ol>
+          </li>
+        </ul>
+
+        <pre>
+                           TYPES OF VISUAL LINES
+
+  Straight / Uniform       ====================================================
+
+  Dashed Segmented         ----------------------------------------------------
+
+  Modulated / Varied Width  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Angular / Jagged         /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+</pre
+        >
+
+        <ul>
+          <li>
+            <strong>Expressive Qualities of Lines:</strong> Lines carry innate
+            emotional and cognitive undertones:
+            <ul>
+              <li>
+                <em>Horizontal Lines:</em> Project stability, rest, serenity,
+                and parallelism to standard horizontal horizon lines.
+              </li>
+              <li>
+                <em>Vertical Lines:</em> Impart height, structure, stability,
+                authority, and upward aspiration.
+              </li>
+              <li>
+                <em>Diagonal Lines:</em> Convey kinetic motion, unrest, speed,
+                dynamic transition, and depth perspective.
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3 id="ch3-3">3.3 The Plane</h3>
+        <ul>
+          <li>
+            <strong>Conceptual Definition:</strong> When a line is translated
+            laterally or shifted in a direction away from its primary vector
+            path, the area swept out forms a <strong>Plane</strong>.
+            Conceptually, a plane has
+            <strong>length and width, but no depth</strong>. It is a
+            two-dimensional (2-D) space bound by contours or structural
+            perimeters.
+          </li>
+          <li>
+            <strong>Digital Implementation:</strong> In digital software
+            environments, planes are everywhere. Every panel, card container,
+            backdrop surface, modal pop-up, window view, and content slot
+            constitutes a plane.
+          </li>
+          <li>
+            <strong>Visual Interaction:</strong> On a screen, planes establish
+            visual hierarchy. By overlaying planes using varying values,
+            shadows, and colors, designers create a pseudo-three-dimensional
+            space (<strong>z-index</strong> hierarchy) on a flat display screen.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <!-- CHAPTER 4 -->
+      <section id="chapter4">
+        <h2>CHAPTER 4: Ideation and Methodologies in Structural Wireframing</h2>
+        <p>
+          Before moving straight to high-fidelity implementation on screen, a
+          digital designer applies distinct ideation workflows to plan layout
+          structures and structural systems.
+        </p>
+
+        <pre>
+                       HIERARCHICAL DESIGN FLOW
+
+    [ Lateral Brainstorming ] ----> Rapid generation of free-form layouts
+               |
+               v
+    [ Linear Reasoning ] ---------> Mapping layouts to strict functional logic
+               |
+               v
+    [ Thumbnails / Scamps ] ------> Small, rapid structural wireframes
+               |
+               v
+    [ High-Fidelity Rendering ] --> Executing exact coordinates on grid
+</pre
+        >
+
+        <h3 id="ch4-1">4.1 Lateral Thinking vs. Linear Reasoning</h3>
+        <ul>
+          <li>
+            <strong>Lateral Thinking:</strong> Coined by Edward de Bono, this
+            involves diffuse, non-linear exploration to uncover non-obvious
+            layout alternatives, fresh asset position arrangements, or creative
+            visual metaphors. Brainstorming and diagramming allow thoughts to
+            radiate outward freely from a central brief requirement. No idea is
+            discarded during this initial divergent phase.
+          </li>
+          <li>
+            <strong>Linear Reasoning:</strong> In contrast, linear reasoning is
+            a focused, methodical, step-by-step logical sequence directed toward
+            a structured final form. It systematically breaks an idea down into
+            component parts—evaluating precise spacing, pixel constraints,
+            typographic structures, color value schemes, and geometric scale.
+          </li>
+        </ul>
+
+        <h3 id="ch4-2">4.2 Roughs, Thumbnails, and Structural Wireframes</h3>
+        <p>
+          The transition from conceptual thought to digital asset execution uses
+          rapid sketching methods:
+        </p>
+        <ul>
+          <li>
+            <strong>Thumbnails:</strong> Stamp-sized structural block-outs drawn
+            rapidly by hand to test basic asset composition, focal weighting,
+            and raw grid patterns without any structural detail.
+          </li>
+          <li>
+            <strong>Roughs (or Scamps):</strong> Larger, slightly more detailed
+            compositions developed from the most promising thumbnails,
+            establishing preliminary placement bounds before launching software
+            configurations.
+          </li>
+        </ul>
+
+        <h3 id="ch4-3">4.3 Semiometrics & Signs in Layout Interfaces</h3>
+        <p>
+          When drawing lines and shapes on a screen, every layout asset serves
+          as a visual language designed to elicit specific audience actions or
+          cognitive responses. Designers leverage Ferdinand de Saussure’s
+          semiotic division:
+        </p>
+        <ul>
+          <li>
+            <strong>The Signifier:</strong> The physical or visual form of an
+            icon, line, or frame container.
+          </li>
+          <li>
+            <strong>The Signified:</strong> The functional meaning or system
+            concept represented by that element.
+          </li>
+        </ul>
+        <p>
+          In digital layout design, a crisp, uniform line or bounding grid
+          structure provides <strong>didactic</strong> clarity—unambiguous,
+          functional organization that naturally guides navigation and
+          information parsing.
+        </p>
+      </section>
+
+      <hr />
+
+      <!-- CHAPTER 5 -->
+      <section id="chapter5">
+        <h2>CHAPTER 5: Lab Application: Mapping the Digital Grid in Canva</h2>
+
+        <h3 id="ch5-1">5.1 The 12-Column Grid Architecture</h3>
+        <p>
+          In modern screen-based front-end engineering, layouts are stabilized
+          by a <strong>12-column responsive grid system</strong>. The number 12
+          is chosen because it is highly divisible, allowing seamless splitting
+          into equal halves (6+6), thirds (4+4+4), fourths (3+3+3+3), or sixths
+          (2+2+2+2+2+2).
+        </p>
+
+        <pre>
+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  |C1|  |C2|  |C3|  |C4|  |C5|  |C6|  |C7|  |C8|  |C9|  |C10  |C11  |C12
+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+  +--+
+  [Gutter]
+</pre
+        >
+
+        <h3 id="ch5-2">5.2 Step-by-Step Task Specifications</h3>
+        <p>
+          Students will construct a custom 12-column system on a blank digital
+          canvas by manually calculating and inputting absolute coordinate
+          positions.
+        </p>
+
+        <h4>Step 1: Canvas Creation & Math Preparation</h4>
+        <ol>
+          <li>
+            Open the Canva workspace and create a custom blank document size of
+            <strong>1920 &times; 1080 pixels</strong>.
+          </li>
+          <li>
+            We intend to map a grid with the following constraints:
+            <ul>
+              <li>Total layout width: 1920 px.</li>
+              <li>
+                Standard outer margins (left and right buffers): 120 px on each
+                side.
+              </li>
+              <li>Active content zone width: 1920 - 240 = 1680 px.</li>
+              <li>
+                Internal gaps between columns (<strong>Gutters</strong>): 20 px
+                fixed width.
+              </li>
+              <li>With 12 columns, there are exactly 11 internal gutters.</li>
+              <li>
+                Total gutter width consumption: 11 &times; 20 px = 220 px.
+              </li>
+              <li>Net width remaining for columns: 1680 - 220 = 1460 px.</li>
+              <li>
+                Width of each single column: 1460 / 12 = 121.66 px. For this
+                structural exercise, we will deploy a simplified formula:
+                <strong>Column Width = 120 px</strong>, allowing crisp layout
+                boundaries and distributing remaining remainder sub-pixels to
+                outer margins.
+              </li>
+            </ul>
+          </li>
+        </ol>
+
+        <h4>Step 2: Drawing the Structural Matrix</h4>
+        <ol>
+          <li>
+            Go to <strong>Elements &gt; Shapes</strong> and select the standard
+            single line vector asset.
+          </li>
+          <li>
+            Set the rotation value to exactly <strong>90&deg;</strong> to make
+            it perfectly vertical.
+          </li>
+          <li>
+            Set the line length property to exactly <strong>1080 px</strong> so
+            it runs from the absolute top to the absolute bottom of the
+            coordinate system.
+          </li>
+          <li>
+            Duplicate this structural line to create boundary indicators across
+            the viewport.
+          </li>
+        </ol>
+
+        <h4>Step 3: Absolute Coordinate Positioning Inputs</h4>
+        <p>
+          Open Canva’s advanced <strong>Position Panel</strong> (located via
+          <em>Position &gt; Advanced Options</em>). For each vector line asset,
+          manually enter its absolute coordinate location values into the input
+          boxes.
+        </p>
+
+        <p>
+          Use this derived coordinate master sheet to position the vertical
+          boundary lines:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Design Grid Asset Column</th>
+              <th>Left Border Position (X-Value)</th>
+              <th>Right Border Position (X-Value)</th>
+              <th>Y-Value Input</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Left Outer Margin Line</strong></td>
+              <td>X: 120</td>
+              <td>-</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 1 Boundaries</strong></td>
+              <td>X: 120</td>
+              <td>X: 240 <em>(Width = 120px)</em></td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 2 Boundaries</strong></td>
+              <td>X: 260 <em>(After 20px Gutter)</em></td>
+              <td>X: 380</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 3 Boundaries</strong></td>
+              <td>X: 400</td>
+              <td>X: 520</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 4 Boundaries</strong></td>
+              <td>X: 540</td>
+              <td>X: 660</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 5 Boundaries</strong></td>
+              <td>X: 680</td>
+              <td>X: 800</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 6 Boundaries</strong></td>
+              <td>X: 820</td>
+              <td>X: 940</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td
+                colspan="4"
+                style="
+                  background-color: var(--bg-accent);
+                  text-align: center;
+                  color: var(--text-main);
+                  font-weight: bold;
+                "
+              >
+                MIDPOINT SPLIT INTERSECTION (True Center Axis at X: 960)
+              </td>
+            </tr>
+            <tr>
+              <td><strong>Column 7 Boundaries</strong></td>
+              <td>X: 960</td>
+              <td>X: 1080</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 8 Boundaries</strong></td>
+              <td>X: 1100</td>
+              <td>X: 1220</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 9 Boundaries</strong></td>
+              <td>X: 1240</td>
+              <td>X: 1360</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 10 Boundaries</strong></td>
+              <td>X: 1380</td>
+              <td>X: 1500</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 11 Boundaries</strong></td>
+              <td>X: 1520</td>
+              <td>X: 1640</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Column 12 Boundaries</strong></td>
+              <td>X: 1660</td>
+              <td>X: 1780</td>
+              <td>Y: 0</td>
+            </tr>
+            <tr>
+              <td><strong>Right Outer Margin Line</strong></td>
+              <td>X: 1800</td>
+              <td>-</td>
+              <td>Y: 0 <em>(1920 - 1800 = 120px margin remains)</em></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="ch5-3">
+          5.3 Technical Discussion Questions for the Lab Review
+        </h3>
+        <div class="grid-demo-box">
+          <ol>
+            <li style="margin-bottom: 1rem">
+              When you adjusted the position input value for
+              <strong>Y</strong> to 100, in which physical direction did the
+              vector line migrate across your computer monitor? Explain why this
+              occurs using the concept of screen coordinate space inversion.
+            </li>
+            <li style="margin-bottom: 1rem">
+              How do conceptual elements (points and lines) differ from the
+              visual lines rendered on your active Canva workspace?
+            </li>
+            <li>
+              How can you use a 12-column structural grid layout to manage
+              visual cognitive load in a web development interface?
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
